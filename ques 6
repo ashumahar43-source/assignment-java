@@ -1,0 +1,17 @@
+@FunctionalInterface
+interface SquareCalculator {
+    int calculate(int number);
+}
+
+public class MethodReferenceSquare {
+    public static int findSquare(int number) {
+        return number * number;
+    }
+
+    public static void main(String[] args) {
+        SquareCalculator calculator = MethodReferenceSquare::findSquare;
+        int num = 7;
+        int square = calculator.calculate(num);
+        System.out.println("Square of " + num + " is: " + square);
+    }
+}
