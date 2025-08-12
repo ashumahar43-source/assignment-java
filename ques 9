@@ -1,0 +1,49 @@
+import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Level;
+import java.io.IOException;
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class AgeValidatorWithLogging {
+    private static final Logger logger = Logger.getLogger(AgeValidatorWithLogging.class.getName());
+
+    public static void validateAge(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be at least 18. Provided age: " + age);
+        } 
+        System.out.println("Access granted. Age is valid.");
+    }
+
+    public static void main(String[] args) {
+        try {
+            FileHandler fileHandler = new FileHandler("age_validation.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            logger.setLevel(Level.ALL);
+
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter your age: ");
+            int age = sc.nextInt();
+
+            try {
+                validateAge(age);
+            } catch (InvalidAgeException e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
+                System.out.println("Exception caught: " + e.getMessage() + " (see log file for details)");
+            }
+
+            sc.close();
+            fileHandler.close();
+        } catch (IOException e) {
+            System.err.println("Failed to set up logger handler.");
+            e.printStackTrace();
+        }
+    }
+}
