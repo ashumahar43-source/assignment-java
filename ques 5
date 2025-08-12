@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class SortStringsDescending {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        names.add("Apple");
+        names.add("Mango");
+        names.add("Banana");
+        names.add("Cherry");
+        names.add("Orange");
+
+        Collections.sort(names, (s1, s2) -> s2.compareTo(s1));
+
+        System.out.println("Strings in descending order:");
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+}
