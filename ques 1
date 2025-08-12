@@ -1,0 +1,17 @@
+package utilities;
+
+public class MathUtils {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}
+import utilities.MathUtils;
+
+public class TestMathUtils {
+    public static void main(String[] args) {
+        int x = 5;
+        int y = 7;
+        int sum = MathUtils.add(x, y);
+        System.out.println("Sum of " + x + " and " + y + " is: " + sum);
+    }
+}
